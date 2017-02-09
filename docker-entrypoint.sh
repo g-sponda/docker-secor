@@ -69,6 +69,7 @@ if [[ -n "$SECOR_MAX_FILE_SECONDS" ]]; then sed -i -e "s/secor.max.file.age.seco
 if [[ -n "$SECOR_FILE_READER_WRITER_FACTORY" ]]; then sed -i -e "s/secor.file.reader.writer.factory=.*$/secor.file.reader.writer.factory=${SECOR_FILE_READER_WRITER_FACTORY}/" $SECOR_CONFIG_FILE ; fi
 if [[ -n "$SECOR_COMPRESSION_CODEC" ]]; then sed -i -e "s/secor.compression.codec=.*$/secor.compression.codec=${SECOR_COMPRESSION_CODEC}/" $SECOR_CONFIG_FILE ; fi
 if [[ -n "$SECOR_FILE_EXTENSION" ]]; then sed -i -e "s/secor.file.extension=.*$/secor.file.extension=${SECOR_FILE_EXTENSION}/" $SECOR_CONFIG_FILE ; fi
+if [[ -n "$SECOR_S3_PREFIX_MD5HASH" ]]; then sed -i -e "s/secor.s3.prefix.md5hash=.*$/secor.s3.prefix.md5hash=${SECOR_S3_PREFIX_MD5HASH}/" $SECOR_CONFIG_FILE ; fi
 
 # If using Timestamp parser
 if [[ -n "$SECOR_TIMESTAMP_NAME" ]]; then sed -i -e "s/message.timestamp.name=.*$/message.timestamp.name=${SECOR_TIMESTAMP_NAME}/" $SECOR_CONFIG_FILE ; fi
