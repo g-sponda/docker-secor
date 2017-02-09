@@ -7,7 +7,7 @@ RUN apt-get update \
 	&& apt-get clean
 
 # Hadoop
-RUN curl -s http://www.eu.apache.org/dist/hadoop/common/hadoop-2.7.1/hadoop-2.7.1.tar.gz | tar -xz -C /usr/local/
+RUN curl -Ls 'https://www.apache.org/dyn/closer.cgi?action=download&filename=hadoop/common/hadoop-2.7.1/hadoop-2.7.1.tar.gz' | tar -xz -C /usr/local/
 RUN ln -s /usr/local/hadoop-2.7.1 /usr/local/hadoop
 
 
