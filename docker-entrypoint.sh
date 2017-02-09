@@ -49,7 +49,7 @@ if [[ -n "$AWS_ENDPOINT" ]]; then sed -i -e "s^aws.endpoint=.*$^aws.endpoint=${A
 # How to connect to Kafka/ZK
 if [[ -n "$KAFKA_SEED_BROKER_HOST" ]]; then sed -i -e "s/kafka.seed.broker.host=.*$/kafka.seed.broker.host=${KAFKA_SEED_BROKER_HOST}/" $SECOR_CONFIG_FILE ; fi
 if [[ -n "$KAFKA_SEED_BROKER_PORT" ]]; then sed -i -e "s/kafka.seed.broker.port=.*$/kafka.seed.broker.port=${KAFKA_SEED_BROKER_PORT}/" $SECOR_CONFIG_FILE ; fi
-if [[ -n "$KAFKA_ZOOKEEPER_PATH" ]]; then sed -i -e "s/kafka.zookeeper.path=.*$/kafka.zookeeper.path=${KAFKA_ZOOKEEPER_PATH}/" $SECOR_CONFIG_FILE ; fi
+if [[ -n "$KAFKA_ZOOKEEPER_PATH" ]]; then sed -i -e "s^kafka.zookeeper.path=.*$^kafka.zookeeper.path=${KAFKA_ZOOKEEPER_PATH}^" $SECOR_CONFIG_FILE ; fi
 if [[ -n "$ZOOKEEPER_QUORUM" ]]; then sed -i -e "s/zookeeper.quorum=.*$/zookeeper.quorum=${ZOOKEEPER_QUORUM}/" $SECOR_CONFIG_FILE ; fi
 
 # Where to store things in S3 and locally within the container
@@ -90,7 +90,7 @@ if [[ -n "$KAFKA_DUAL_COMMIT_ENABLED" ]]; then sed -i -e "s/kafka.dual.commit.en
 
 if [[ -n "$SECOR_OSTRICH_PORT" ]]; then sed -i -e "s/ostrich.port=.*$/ostrich.port=${SECOR_OSTRICH_PORT}/" $SECOR_CONFIG_FILE ; fi
 
-if [[ -n "$SECOR_ZOOKEEPER_PATH" ]]; then sed -i -e "s/secor.zookeeper.path=.*$/secor.zookeeper.path=${SECOR_ZOOKEEPER_PATH}/" $SECOR_CONFIG_FILE ; fi
+if [[ -n "$SECOR_ZOOKEEPER_PATH" ]]; then sed -i -e "s^secor.zookeeper.path=.*$^secor.zookeeper.path=${SECOR_ZOOKEEPER_PATH}^" $SECOR_CONFIG_FILE ; fi
 
 JVM_MEMORY=${JVM_MEMORY:-512m}
 
