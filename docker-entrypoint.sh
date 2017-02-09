@@ -90,6 +90,8 @@ if [[ -n "$KAFKA_DUAL_COMMIT_ENABLED" ]]; then sed -i -e "s/kafka.dual.commit.en
 
 if [[ -n "$SECOR_OSTRICH_PORT" ]]; then sed -i -e "s/ostrich.port=.*$/ostrich.port=${SECOR_OSTRICH_PORT}/" $SECOR_CONFIG_FILE ; fi
 
+if [[ -n "$SECOR_ZOOKEEPER_PATH" ]]; then sed -i -e "s/secor.zookeeper.path=.*$/secor.zookeeper.path=${SECOR_ZOOKEEPER_PATH}/" $SECOR_CONFIG_FILE ; fi
+
 JVM_MEMORY=${JVM_MEMORY:-512m}
 
 java -Xmx$JVM_MEMORY -ea -cp /opt/secor/secor.jar \
