@@ -93,10 +93,26 @@ if [[ -n "$SECOR_OSTRICH_PORT" ]]; then sed -i -e "s/ostrich.port=.*$/ostrich.po
 
 if [[ -n "$SECOR_ZOOKEEPER_PATH" ]]; then sed -i -e "s^secor.zookeeper.path=.*$^secor.zookeeper.path=${SECOR_ZOOKEEPER_PATH}^" $SECOR_CONFIG_FILE ; fi
 
+# see https://medium.com/@gchudnov/trapping-signals-in-docker-containers-7a57fdda7d86#.bh35ir4u5
+SECOR_PID=0
+term_handler() {
+  echo 'Signal trapped, stopping ....'
+  if [ $SECOR_PID -ne 0 ]; then
+    kill -s TERM "$SECOR_PID"
+    wait "$SECOR_PID"
+  fi
+  echo 'Stopped.'
+  exit
+}
+trap "term_handler" SIGHUP SIGINT SIGTERM
+
 JVM_MEMORY=${JVM_MEMORY:-512m}
 
 java -Xmx$JVM_MEMORY -ea -cp /opt/secor/secor.jar \
   -Dsecor_group=$SECOR_GROUP \
   -Dlog4j.configuration=file:/opt/secor/log4j.docker.properties \
   -Dconfig=/opt/secor/secor.prod.properties \
-  com.pinterest.secor.main.ConsumerMain
+  com.pinterest.secor.main.ConsumerMain &
+
+SECOR_PID=$!
+wait
