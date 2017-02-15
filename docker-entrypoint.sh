@@ -79,7 +79,7 @@ if [[ -n "$SECOR_TIMESTAMP_PATTERN" ]]; then sed -i -e "s/message.timestamp.inpu
 if [[ -n "$PARTITIONER_GRANULARITY_HOUR" ]]; then sed -i -e "s/partitioner.granularity.hour=.*$/partitioner.granularity.hour=${PARTITIONER_GRANULARITY_HOUR}/" $SECOR_CONFIG_FILE ; fi
 if [[ -n "$PARTITIONER_GRANULARITY_MINUTE" ]]; then sed -i -e "s/partitioner.granularity.minute=.*$/partitioner.granularity.minute=${PARTITIONER_GRANULARITY_MINUTE}/" $SECOR_CONFIG_FILE ; fi
 if [[ -n "$PARTITIONER_GRANULARITY_DATE_FORMAT" ]]; then sed -i -e "s^partitioner.granularity.date.format=.*$^partitioner.granularity.date.format=${PARTITIONER_GRANULARITY_DATE_FORMAT}^" $SECOR_CONFIG_FILE ; fi
-if [[ -n "$PARTITIONER_GRANULARITY_DATE_PREFIX" ]]; then sed -i -e "s^partitioner.granularity.date.prefix=.*$^partitioner.granularity.date.prefix=${PARTITIONER_GRANULARITY_DATE_PREFIX}^" $SECOR_CONFIG_FILE ; fi
+if [[ -n "${PARTITIONER_GRANULARITY_DATE_PREFIX+x}" ]]; then sed -i -e "s^partitioner.granularity.date.prefix=.*$^partitioner.granularity.date.prefix=${PARTITIONER_GRANULARITY_DATE_PREFIX}^" $SECOR_CONFIG_FILE ; fi
 
 # Consumer configuration
 if [[ -n "$SECOR_KAFKA_GROUP" ]]; then sed -i -e "s/secor.kafka.group=.*$/secor.kafka.group=${SECOR_KAFKA_GROUP}/" $SECOR_CONFIG_FILE ; fi
