@@ -24,7 +24,7 @@ repositories {
 }
 
 dependencies {
-    compile ('com.github.gwilym:secor:datemessageparsercustomdateformat-SNAPSHOT') {
+    compile ('com.github.pinterest:secor:de5a604') {
         // exclude kafka 0.8.x
         exclude group: 'org.apache.kafka', module: 'kafka_2.10'
     }
