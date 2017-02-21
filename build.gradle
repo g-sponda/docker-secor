@@ -24,7 +24,7 @@ repositories {
 }
 
 dependencies {
-    compile ('com.github.pinterest:secor:de5a604') {
+    compile ('com.github.gwilym:secor:write-offset-SNAPSHOT') {
         // exclude kafka 0.8.x
         exclude group: 'org.apache.kafka', module: 'kafka_2.10'
     }
