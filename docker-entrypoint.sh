@@ -95,6 +95,8 @@ if [[ -n "$SECOR_OSTRICH_PORT" ]]; then sed -i -e "s/ostrich.port=.*$/ostrich.po
 
 if [[ -n "$SECOR_ZOOKEEPER_PATH" ]]; then sed -i -e "s^secor.zookeeper.path=.*$^secor.zookeeper.path=${SECOR_ZOOKEEPER_PATH}^" $SECOR_CONFIG_FILE ; fi
 
+if [[ -n "$SECOR_MESSAGE_TRANSFORMER_CLASS" ]]; then sed -i -e "s^secor.message.transformer.class=.*^secor.message.transformer.class=${SECOR_MESSAGE_TRANSFORMER_CLASS}^" $SECOR_CONFIG_FILE ; fi
+
 # see https://medium.com/@gchudnov/trapping-signals-in-docker-containers-7a57fdda7d86#.bh35ir4u5
 SECOR_PID=0
 term_handler() {
