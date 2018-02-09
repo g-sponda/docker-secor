@@ -97,6 +97,18 @@ if [[ -n "$SECOR_ZOOKEEPER_PATH" ]]; then sed -i -e "s^secor.zookeeper.path=.*$^
 
 if [[ -n "$SECOR_MESSAGE_TRANSFORMER_CLASS" ]]; then sed -i -e "s^secor.message.transformer.class=.*^secor.message.transformer.class=${SECOR_MESSAGE_TRANSFORMER_CLASS}^" $SECOR_CONFIG_FILE ; fi
 
+# translate all KAFKA_* vars into a properties file for kafka consumer
+touch /opt/secor/kafka.consumer.properties
+for VAR in `env`
+do
+  if [[ $VAR =~ ^KAFKA_ && ! $VAR =~ ^KAFKA_SEED_ && ! $VAR =~ ^KAFKA_ZOOKEEPER_PATH$ ]]; then
+    kafka_name=$(echo "$VAR" | sed -r "s/KAFKA_(.*)=.*/\1/g" | tr '[:upper:]' '[:lower:]' | tr _ .)
+    env_var=$(echo "$VAR" | sed -r "s/(.*)=.*/\1/g")
+    echo "Setting $kafka_name in kafka.consumer.properties" # mostly for debugging, could be removed
+    echo "$kafka_name=${!env_var}" >> /opt/secor/kafka.consumer.properties
+  fi
+done
+
 # see https://medium.com/@gchudnov/trapping-signals-in-docker-containers-7a57fdda7d86#.bh35ir4u5
 SECOR_PID=0
 term_handler() {
@@ -116,6 +128,7 @@ java -Xmx$JVM_MEMORY -ea -cp /opt/secor/secor.jar \
   -Dsecor_group=$SECOR_GROUP \
   -Dlog4j.configuration=file:/opt/secor/log4j.docker.properties \
   -Dconfig=/opt/secor/secor.prod.properties \
+  -Dsecor.kafka.consumer.config=/opt/secor/kafka.consumer.properties \
   com.pinterest.secor.main.ConsumerMain &
 
 SECOR_PID=$!
