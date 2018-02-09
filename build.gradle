@@ -21,6 +21,7 @@ repositories {
     jcenter()
     maven { url "http://maven.twttr.com/" }
     maven { url 'https://jitpack.io' }
+    maven { url 'http://packages.confluent.io/maven/' }
 }
 
 dependencies {
