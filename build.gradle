@@ -15,6 +15,10 @@ plugins {
   id 'application'
 }
 
+shadowJar {
+  zip64 true
+}
+
 mainClassName = 'com.pinterest.secor.main.ConsumerMain'
 
 repositories {
