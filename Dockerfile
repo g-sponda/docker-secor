@@ -1,4 +1,4 @@
-FROM java:7
+FROM java:8
 
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends \
@@ -11,7 +11,7 @@ RUN curl -Ls 'https://www.apache.org/dyn/closer.cgi?action=download&filename=had
 RUN ln -s /usr/local/hadoop-2.7.5 /usr/local/hadoop
 
 
-ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/usr/local/hadoop/lib/native
 ENV PATH $PATH:/usr/local/hadoop/bin
 
